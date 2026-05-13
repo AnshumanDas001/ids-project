@@ -2,15 +2,6 @@
 
 A production-inspired Python/React network intrusion detection system that captures live packets, analyzes them in real-time, and alerts on suspicious activity like port scans, SYN floods, ICMP floods, and high-frequency IP traffic.
 
-```
-   __________ ___   __________________ 
-   \\\  ____//\\\\__ \\\  ______\\\  ______\
-    \\\ |    /| | \\\ \\\  |____ \\\  |____ 
-     \\|  |  |_|  \\\ \\\  ___ \\  ___ \
-      |   |   |   \\\ \\\  ___/  \\\  ___/
-      |___|   |___ \\\ \\\     |   \\|
-                   \\\|_____|    
-```
 
 ## Features
 
