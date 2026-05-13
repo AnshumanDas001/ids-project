@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import json
 from datetime import datetime
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 
@@ -49,6 +49,28 @@ def push_packet(parsed):
 
 register_alert_callback(push_alert)
 register_packet_callback(push_packet)
+
+
+# ── Serve React Frontend ──────────────────────────────────────────────────────
+
+# Paths for frontend files
+frontend_dist = os.path.join(os.path.dirname(__file__), '..', 'dashboard', 'dist')
+
+# Serve static files
+@app.route('/')
+def serve_frontend():
+    if os.path.exists(os.path.join(frontend_dist, 'index.html')):
+        return send_from_directory(frontend_dist, 'index.html')
+    else:
+        return jsonify({'status': 'IDS Server running. Build frontend with: npm run build'})
+
+@app.route('/<path:path>')
+def serve_static(path):
+    if os.path.exists(os.path.join(frontend_dist, path)):
+        return send_from_directory(frontend_dist, path)
+    else:
+        # Fallback to index.html for client-side routing
+        return send_from_directory(frontend_dist, 'index.html') if os.path.exists(os.path.join(frontend_dist, 'index.html')) else ('Not found', 404)
 
 
 # ── REST endpoints ────────────────────────────────────────────────────────────

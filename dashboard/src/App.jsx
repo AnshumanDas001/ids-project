@@ -5,7 +5,7 @@ import {
 } from "recharts";
 
 // ── Config ─────────────────────────────────────────────────────────────────
-const API = "http://localhost:5000/api";
+const API = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 const POLL_MS = 2000;
 
 // ── Severity colours ────────────────────────────────────────────────────────
